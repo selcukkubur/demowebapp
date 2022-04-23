@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: branch-location
+  namespace: branch-location
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/subnets: subnet-0959be32166d561f6,subnet-002c1eae547b0ba7c,subnet-0c64175b88e8263cf
+    alb.ingress.kubernetes.io/tags: Environment=uat
+    alb.ingress.kubernetes.io/load-balancer-name: k8s-demo-app
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:972548592279:certificate/3bbf00cc-0f1b-4c6c-b1a3-9d25d3de630c
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+spec:
+  rules:
+  - host: bl-uat.cofeapp.com
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-location
+            port:
+              number: 3000
