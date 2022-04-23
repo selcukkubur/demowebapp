@@ -7,3 +7,4 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t selcukkubur/k8s-demo-app -f Dockerfile .
   - docker push selcukkubur/k8s-demo-app
+  
