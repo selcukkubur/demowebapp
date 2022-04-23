@@ -1,0 +1,5 @@
+resources:
+- mongo-deployment.yaml
+- mongo-service.yaml
+- namespace.yaml
+- Ingress.yaml

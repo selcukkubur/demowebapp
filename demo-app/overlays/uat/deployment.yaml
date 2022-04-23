@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: branch-location
+  namespace: branch-location
+spec:
+  # minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: branch-location
+  replicas: 1
+  revisionHistoryLimit: 2
+
+  template: # define a pod
+    metadata:
+      labels:
+        app: branch-location
+    spec:
+      containers:
+        - name: branch-location
+          image: '972548592279.dkr.ecr.eu-west-1.amazonaws.com/branch-locations:develop-076b6d'
+          imagePullPolicy: Always
+          env:
+            - name: MAINDB_ENDPOINT
+              value: 'branch-location-uat.cnphtrnrzaac.eu-west-1.rds.amazonaws.com'
+            - name: MAINDB_DBNAME
+              value: 'postgres'
+            - name: MAINDB_USERNAME
+              value: 'postgres'
+            - name: MAINDB_PASSWORD
+              value: 'H1S2ol2BbhjDJQET'
+            - name: SPRING_PROFILES_ACTIVE
+              value: 'general,uat'
