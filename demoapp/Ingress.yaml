@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-demo-app
+  namespace: k8s-demo-app
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/subnets: subnet-0b701be764acf84a9,subnet-067848f3454f6f96a,subnet-0e0a2fb497214332f
+    alb.ingress.kubernetes.io/tags: Environment=prod
+    alb.ingress.kubernetes.io/load-balancer-name: k8s-demo-app
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:972548592279:certificate/3bbf00cc-0f1b-4c6c-b1a3-9d25d3de630c
+spec:
+  rules:
+  - host: k8s-demo-app.cloudhero.es
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp-service
+            port:
+              number: 3000
