@@ -9,8 +9,7 @@ metadata:
     alb.ingress.kubernetes.io/subnets: subnet-0b701be764acf84a9,subnet-067848f3454f6f96a,subnet-0e0a2fb497214332f
     alb.ingress.kubernetes.io/tags: Environment=prod
     alb.ingress.kubernetes.io/load-balancer-name: k8s-demo-app
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:972548592279:certificate/3bbf00cc-0f1b-4c6c-b1a3-9d25d3de630c
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":3000},{"HTTP":80}]'
 spec:
   rules:
   - host: k8s-demo-app.cloudhero.es
