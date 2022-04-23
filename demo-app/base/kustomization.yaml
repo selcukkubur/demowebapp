@@ -1,5 +1,9 @@
 resources:
 - mongo-deployment.yaml
 - mongo-service.yaml
+- mongo-secret.yaml
+- mongo-config.yaml
+- webapp-deployment.yaml
+- webapp-service.yaml
 - namespace.yaml
 - Ingress.yaml
